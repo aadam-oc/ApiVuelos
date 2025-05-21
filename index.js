@@ -251,8 +251,11 @@ app.get('/vuelos', (req, res) => {
             destino.pais as destino_pais,
             destino.ciudad as destino_ciudad,
             v.dia,
-            v.hora,
-            v.imagen_url
+            DATE_FORMAT(v.hora, '%H:%i') as hora,
+            v.imagen_url,
+            ROUND(v.precio, 0) as precio,
+            v.duracion,
+            v.aerolinea
         FROM vuelos v
         JOIN destinos origen ON v.id_origen = origen.id_destino
         JOIN destinos destino ON v.id_destino = destino.id_destino
